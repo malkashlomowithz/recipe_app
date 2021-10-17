@@ -1,0 +1,36 @@
+.about {
+    width: 50%;
+    height:100%;
+    padding: 35px;
+    background: url('./about.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: 100%;
+    -o-background-size: cover;
+    background-size: cover;
+    border-right: 1px solid green;
+    min-height: 550px;
+    position : fixed;
+    position: sticky; 
+    top: 80px; 
+    
+}
+.aboutUs {
+    
+    padding: 50px ;
+    margin: auto;
+    margin-bottom: 30px;
+    font-size: 20px;
+    text-align: center;
+    background-color: #ffffff;
+    opacity: 0.6;
+    border: 1px solid orangered;
+}  
+@media screen and (max-width: 940px)
+{
+    .about {
+        width: 100%;
+        position:initial;
+    }
+   
+    
+}  

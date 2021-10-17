@@ -1,0 +1,19 @@
+.usersTitle {
+    
+    color:#eb6e15
+}
+.recipes {
+
+text-align: center;
+padding:7px;
+display: contents;
+
+}
+
+@media screen and (max-width: 940px)
+{
+    .recipes {
+        display:inline-block ;
+        width: 100%;
+    }
+}
