@@ -30,7 +30,11 @@
     .about {
         width: 100%;
         position:initial;
+        padding: 15px;
     }
-   
+    .aboutUs {
+
+        padding: 10px;
+    }
     
 }  

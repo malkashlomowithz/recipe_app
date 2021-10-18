@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
-import {API_BASE_URL_RECIPES} from '../../constants/apiConstants';
+import {API_BASE_URL_RECIPES, API_BASE_URL_AUTH} from '../../constants/apiConstants';
 import './UsersRecipes.css'
 import RecipeCard from '../RecipeComponents/RecipeCard'
 
@@ -30,7 +30,7 @@ import RecipeCard from '../RecipeComponents/RecipeCard'
           if(res){
 
           //before rendering the data on the browser we will make sure the user is token logged in
-            await axios.post(`https://my-recipe-app-1fe491.appdrag.site/api/auth/tokenLogin`,localUserDetails)
+            await axios.post(`${API_BASE_URL_AUTH}/tokenLogin`,localUserDetails)
             .then(result => {
 
               if(result.data.payload === "Not Logged"){
@@ -38,15 +38,17 @@ import RecipeCard from '../RecipeComponents/RecipeCard'
                 //if user is not token logged in redirect him to login.
     
                 props.history.push(`/login`);
+
               }else if (result.data.payload.token) {
 
                 setData(res.data);
+                
                 localStorage.setItem("token", result.data.payload.token)
               }else {
 
                 props.history.push(`/login`);
 
-              }    
+               }    
             })
             .catch(error => {
     

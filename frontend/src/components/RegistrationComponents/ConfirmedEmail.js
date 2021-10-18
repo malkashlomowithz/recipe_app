@@ -84,7 +84,7 @@ function ConfirmedEmail(props) {
                        "token": newToken }
               console.log(data)
 
-        await  axios.put("https://my-recipe-app-1fe491.appdrag.site/api/auth/sendNewLink", data)
+        await  axios.put(`${API_BASE_URL_AUTH}/sendNewLink`, data)
 
         .then(async response => {
 

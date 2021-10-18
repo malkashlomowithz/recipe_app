@@ -6,6 +6,7 @@ const path = require('path');
 const router = express();
 
 
+
 //require functions from controller
 
 const { addNewRecipe , 
@@ -85,14 +86,17 @@ router.put('/recipe/image/:id', async (req, res, ) =>{
 
   let num = 1;
     while(fs.existsSync(uploadDir)){
+
         uploadDir = path.join(__dirname, 'public/', baseName + '-' + num + extName);
         num++;
     }
     targetFile.mv(uploadDir, (err) => {
       if (err){
+ 
           return res.status(500).send(err);
         }
           const thisFile = targetFile.name
+
      updateRecipeWithImage(req.params.id,  thisFile)
       .then(recipe => {
         res.json(recipe).status(200)

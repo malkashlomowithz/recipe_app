@@ -154,7 +154,7 @@ function AddRecipe(props) {
                     <option value="meat">Meat</option>
                     <option value="fish">Fish</option>
                     <option value="salads">Salads</option>
-                    <option value="spreads ">Spreads</option>
+                    <option value="spreads">Spreads</option>
                     <option value="pies ">Pies</option>
                     <option value="side_dishes">Side dishes</option>
                     <option value="soups">Soups</option>

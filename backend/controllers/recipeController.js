@@ -63,6 +63,8 @@ async function updateRecipe(id, updatedRecipe){
 }
 
 async function updateRecipeWithImage(id,imageFile){
+
+  console.log(imageFile)
   try{
     return await Recipe.findByIdAndUpdate(id,{file:imageFile})
 

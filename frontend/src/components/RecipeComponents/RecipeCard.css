@@ -1,11 +1,4 @@
-.cardsTop10 {
 
-    padding-right: 35px;
-    margin-top: 50px;
-    display: grid;
-    grid-template-columns: 50% 50% ;
-    grid-gap: 35px ;
-}
 .recipeCard {
 
     overflow:hidden;
@@ -32,5 +25,8 @@
 }
 @media screen and (max-width: 940px)
 {
-  
+    .recipeCard {
+
+       
+    }
 }

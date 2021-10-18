@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import './AddRecipe.css'
-import {API_BASE_URL_RECIPES} from '../../constants/apiConstants';
+import {API_BASE_URL_RECIPES , API_BASE_URL} from '../../constants/apiConstants';
 import { withRouter } from "react-router-dom";
 import{ GoThumbsup, GoThumbsdown} from "react-icons/go";
 
@@ -70,7 +70,7 @@ function SendRecipe(props) {
                 recipe: state.recipe,
                 email: localStorage.getItem('email') 
             }  
-            axios.post(`http://localhost:8080/api/share`, info)
+            axios.post(`${API_BASE_URL}/share`, info)
             .then(res => {
                 if(res.status === 200){
                     setState(prevState => ({

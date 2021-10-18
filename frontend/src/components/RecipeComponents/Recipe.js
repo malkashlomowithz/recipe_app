@@ -54,7 +54,7 @@ function Recipe(props) {
 
     if(window.confirm(`Are you sure you want to delete ${title} recipe?`)){
 
-    axios.delete(`http://localhost:8080/api/recipe/${id}`,)
+    axios.delete(`${API_BASE_URL_RECIPES}/${id}`,)
       .then(res => {
         if(res.status === 200){
 
@@ -94,7 +94,7 @@ function Recipe(props) {
     const data = new FormData() 
     data.append('file', state.selectedFile)
 
-    axios.put(`http://localhost:8080/api/recipe/image/${id}`, data,)
+    axios.put(`${API_BASE_URL_RECIPES}/image/${id}`, data,)
     .then(res => {
  
       if(res.status === 200) {

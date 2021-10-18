@@ -17,7 +17,7 @@ function UpdateRecipe(props) {
 
         const recipeId = window.location.pathname.split('/')[2];    
         
-        await axios(`http://localhost:8080/api/recipe/${recipeId}`)
+        await axios(`${API_BASE_URL_RECIPES}/${recipeId}`)
 
         .then(res => {
 

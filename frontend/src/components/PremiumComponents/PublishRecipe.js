@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios';
-import {API_BASE_URL_RECIPES} from '../../constants/apiConstants';
+import {API_BASE_URL_RECIPES, API_BASE_URL_PUBLISH, API_BASE_URL_PREMIUM} from '../../constants/apiConstants';
 
 
 function PublishRecipe() {
@@ -21,13 +21,15 @@ function PublishRecipe() {
  useEffect(() => {
 
     const  fetchData =  async () => {
-
-        
                
         await axios(`${API_BASE_URL_RECIPES}/${recipeId}`)
         .then(res => {
+            console.log(res)
 
-            sendRecipeToState(res.data);
+            setState(prevState => ({
+                ...prevState,
+                recipe: res.data
+            }));
             setData([res.data]);
         })
         .catch(error => {
@@ -48,10 +50,10 @@ function PublishRecipe() {
              'email':localStorage.getItem('email'),
              'token':localStorage.getItem('token')
          }
-        await axios.post(`https://my-recipe-app-1fe491.appdrag.site/api/premium/checkPremium`, user)
+        await axios.post(`${API_BASE_URL_PREMIUM}/checkPremium`, user)
         
         .then(res => {
-            console.log(res)
+            
             setUser(res.data.payload);
             setState(prevState => ({
                 ...prevState,
@@ -65,16 +67,20 @@ function PublishRecipe() {
     fetchData();    
  }, []);
 
-    const sendRecipeToState = (data) => {
+    async function  handleSubmitClick(){
 
-        setState(prevState => ({
-            ...prevState,
-            recipe: data
-        }));
-    }
-    const handleSubmitClick = () => {
+        const publishRecipe =  state.recipe;
+        await axios.post(`${ API_BASE_URL_PUBLISH}`, publishRecipe )
 
-        console.log(recipeId)
+        .then(res => {
+
+            console.log(res)
+        })
+        .catch(error => {
+
+            console.log(error)
+        })
+
     }
 
     //only if the user is a premium user will he see this return on the recipe page.

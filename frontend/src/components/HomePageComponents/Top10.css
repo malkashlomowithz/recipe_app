@@ -24,8 +24,22 @@
     color:green;
 
 }
+.cardContainer {
+
+    text-align: center;
+    padding:7px;
+    display: flex;
+    display: contents;
+    
+    }
+    
 @media screen and (max-width: 940px)
-{ 
+    {
+        .cardContainer {
+            display:inline-block ;
+            width: 100%;
+        }
+   
     .top10 {
         width:100%
     }

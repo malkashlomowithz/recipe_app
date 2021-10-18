@@ -1,6 +1,6 @@
 import React, {useState ,useEffect} from 'react';
 import axios from 'axios';
-import { API_BASE_URL_ADMIN} from '../../constants/apiConstants';
+import { API_BASE_URL_ADMIN, API_BASE_URL_PREMIUM} from '../../constants/apiConstants';
 import { withRouter } from "react-router-dom";
 
 function Users() {
@@ -39,7 +39,7 @@ function Users() {
 
           let user = {"id": userId}
 
-          await axios.post(`https://my-recipe-app-1fe491.appdrag.site/api/admin/deleteUser`,user)
+          await axios.post(`${ API_BASE_URL_ADMIN}/deleteUser`,user)
               .then(res => {
 
                 if(res.data.status === 200){
@@ -58,7 +58,7 @@ function Users() {
         let thisUser = {"email": email,
                         "nickname": nickname}
 
-        await axios.post(`https://my-recipe-app-1fe491.appdrag.site/api/premium/addPremiumUser`,thisUser)
+        await axios.post(`${API_BASE_URL_PREMIUM}/addPremiumUser`,thisUser)
             .then(res => {
 
               if(res.data.status === 200){
@@ -96,8 +96,8 @@ function Users() {
                     <td >{item.id}</td>
                     <td >{item.nickname}</td>
                     <td>{item.email}</td>
-                    <td>{item.joined_date}</td>
-                    <td>{item.last_logged}</td>
+                    <td>{(item.joined_date).slice(0,10)}</td>
+                    <td>{(item.last_logged.slice(0,10))}</td>
                     <td onClick = {() => deleteUser(item.id)} 
                         style = {{cursor: "pointer", color: "green",font_weight: "bold"}}>
                             DELETE 

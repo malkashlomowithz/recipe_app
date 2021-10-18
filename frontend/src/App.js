@@ -14,11 +14,13 @@ import AddRecipe from './components/RecipeComponents/AddRecipe'
 import UsersRecipes from './components/RecipeComponents/UsersRecipes';
 import UpdateRecipe from './components/RecipeComponents/UpdateRecipe';
 import SendRecipe from './components/RecipeComponents/SendRecipe';
-import Recipe from './components/RecipeComponents/Recipe'
+import Recipe from './components/RecipeComponents/Recipe';
+import Top10page from './components/HomePageComponents/Top10page'
 import EditProfile from './components/LoginComponents/EditProfile';
 import Explanation from './components/PremiumComponents/Explanation'
 import ConfirmedPayment from './components/PremiumComponents/ConfirmedPayment'
 import AdminPage from './components/AdminComponenets/AdminComponents';
+import NotFound from './components/Notfound'
 
 import {
   BrowserRouter as Router,
@@ -73,6 +75,9 @@ function App() {
             <Route path="/recipe">
               <Recipe/>
             </Route>
+            <Route path="/top10page">
+              <Top10page/>
+            </Route>
             <Route path="/editProfile">
               <EditProfile/>
             </Route> 
@@ -94,6 +99,9 @@ function App() {
           {userIsAdmin === "true" ? (
           <Route exact path="/admin" component = {AdminPage}/>
           ):(<Redirect to = "/" />)} 
+           <Route path="/*">
+              <NotFound/>
+          </Route>
           </Switch>
                
      <Footer/>

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
 import{ GoThumbsup, GoThumbsdown} from "react-icons/go";
+import {API_BASE_URL} from '../../constants/apiConstants';
 
 function ContactForm(props) {
 
@@ -35,7 +36,7 @@ function ContactForm(props) {
                 "email":state.email,
                 "message": state.message,
             }
-            axios.post(`http://localhost:8080/api/contactUs`, data)
+            axios.post(`${API_BASE_URL}/contactUs`, data)
             .then(res => {
                 if(res.status === 200){
                 setState(prevState => ({
