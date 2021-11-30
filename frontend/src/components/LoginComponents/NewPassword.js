@@ -89,6 +89,7 @@ function NewPassword(props) {
                             redirectToConfirm()   
                             }, 3500);                  
                         }else {
+                            console.log(response.data.payload.token)
                             localStorage.setItem("token", response.data.payload.token);
                             localStorage.setItem("email", response.data.payload.email );
                             localStorage.setItem("device",  response.data.payload.device);

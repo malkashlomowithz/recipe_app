@@ -4,6 +4,7 @@ import './AddRecipe.css'
 import {API_BASE_URL_RECIPES , API_BASE_URL_AUTH} from '../../constants/apiConstants';
 import { withRouter } from "react-router-dom";
 import{ GoThumbsup, GoThumbsdown} from "react-icons/go";
+import { ClassicSpinner } from "react-spinners-kit";
 
 function AddRecipe(props) {
 
@@ -17,7 +18,8 @@ function AddRecipe(props) {
         preparation_time: "",
         file: "",
         successMessage: null,
-        alertMessage: null
+        alertMessage: null,
+        loading: false
      })
 //set the state: send the input values to state
      const handleChange = (e) => {
@@ -38,6 +40,12 @@ function AddRecipe(props) {
 
     async function  handleSubmitClick(e){
 
+        //get the spinner working
+        setState(prevState => ({
+            ...prevState,
+            loading : true,
+        }));
+
         e.preventDefault();
         // check user filed in the fieleds
         if( state.title.length && state.category.length && state.ingredients.length && state.preparations.length) {
@@ -53,7 +61,7 @@ function AddRecipe(props) {
                 file: state.file, 
                 created_by: localStorage.getItem('email') 
             }  
-            console.log(recipe)
+            
 
             //check user is logged in with token login.
                 //get user details from localStorage
@@ -88,7 +96,8 @@ function AddRecipe(props) {
                     setState(prevState => ({
                         ...prevState,
                         alertMessage : null,
-                        successMessage : "your recipe was added to your personal recipe collection"
+                        successMessage : "your recipe was added to your personal recipe collection",
+                        loading: false,
                     }));
                     setTimeout(() => {
 
@@ -104,8 +113,10 @@ function AddRecipe(props) {
                  // in case recipe was not added show the user a alert message
 
                         setState(prevState => ({
-                            ...prevState,
-                            alertMessage : `oops!${error}` 
+                            ...prevState,                       
+                            successMessage : null,
+                            alertMessage : `oops!${error}`,
+                            loading: false, 
                         }));
                  })    
               }
@@ -118,8 +129,10 @@ function AddRecipe(props) {
         //if user did not add all the recipe information.
 
         setState(prevState => ({
-            ...prevState,
-            alertMessage : "oops! you are missing some basic information about your recipe."
+            ...prevState,                       
+            successMessage : null,
+            alertMessage : "oops! you are missing some basic information about your recipe.",
+            loading: false, 
         }));
     }
 }  
@@ -218,17 +231,22 @@ function AddRecipe(props) {
                 />             
                 </div>
          </div>
-            <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
+            <div className="alert alert-success mt-2" style = {{display: state.successMessage ? 'block' : 'none' }} role="alert">
               <span><GoThumbsup/> </span>  {state.successMessage}
             </div>
-            <div className="alert alert-danger mt-2" style={{display: state.alertMessage ? 'block' : 'none' }} role="alert">
+            <div className="alert alert-danger mt-2" style = {{display: state.alertMessage ? 'block' : 'none' }} role="alert">
               <span><GoThumbsdown/> </span>  {state.alertMessage}
             </div>
                 <button 
                     type="submit" 
-                    className="btn btn-primary"
+                    className="btn btn-outline-success"
                     onClick={handleSubmitClick}
-                >Add this recipe</button>
+                >                
+                   <span> Add this recipe  &nbsp; </span> 
+                   <span><ClassicSpinner size = {20} color = "#14660f" loading = {state.loading} /></span> 
+                    
+                    </button>
+                
          </form>
          
          </div>                        

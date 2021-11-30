@@ -8,7 +8,10 @@
     color: green;
     font-weight: bold;
 }
-.btn{background-color:#eb6e15;
+.btn{
+     display: flex;
+     margin: 0 auto;
+     
 }
 .hv-center{
     border:1px solid green;

@@ -4,12 +4,13 @@ import axios from 'axios';
 import {API_BASE_URL_RECIPES, API_BASE_URL_AUTH} from '../../constants/apiConstants';
 import './UsersRecipes.css'
 import RecipeCard from '../RecipeComponents/RecipeCard'
-
+import Loading from '../LoadingComponents/Loading'
  function UsersRecipes(props) {
 
   //get the users recipe collection from the DB
 
   const [data, setData] =  useState([]);
+  const [isLoading, setLoading] = useState(true)
   const localUserDetails = {
 
     email : localStorage.getItem('email'),
@@ -42,7 +43,7 @@ import RecipeCard from '../RecipeComponents/RecipeCard'
               }else if (result.data.payload.token) {
 
                 setData(res.data);
-                
+                setLoading(false)
                 localStorage.setItem("token", result.data.payload.token)
               }else {
 
@@ -76,7 +77,7 @@ import RecipeCard from '../RecipeComponents/RecipeCard'
 
            <h1  className = "usersTitle"> all my recipes </h1>
            <small className = "form-text text-muted"> There are {data.length} recipes in your collection.</small>
-
+             <div style={{display: isLoading  ? 'block' : 'none' }}><Loading/></div>
            <div className = "row m-1" >
 
               {data.map(item => (

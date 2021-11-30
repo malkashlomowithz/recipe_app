@@ -62,7 +62,7 @@ function Recipe(props) {
           setState(prevState => ({
             ...prevState,
             alertMessage : null,
-            successMessage : <h4>{title} was deleted from your recipe collection!</h4>
+            successMessage : <p>{title} was deleted from your recipe collection!</p>
         }));
 
         // send the user back to his collection.
@@ -87,7 +87,13 @@ function Recipe(props) {
 
     props.history.push(`/sendRecipe/${id}`);
   }
-
+  // adding a image to the state
+  const onChangeHandler=event=>{
+    setState({
+      selectedFile: event.target.files[0],
+      loaded: 0,
+    })
+  }
   //Send the image to the DB
   const onClickHandler = (id, title) => {
   
@@ -96,15 +102,22 @@ function Recipe(props) {
 
     axios.put(`${API_BASE_URL_RECIPES}/image/${id}`, data,)
     .then(res => {
+
+     const image = res.data
  
       if(res.status === 200) {
+        //if the recipe was updated with the new image then:
+        //A)the state will be set with the updated image
+        setData([image])
+        //B)the user will see a success message
         setState(prevState => ({
           ...prevState,
           alertMessage : null,
           successMessage : `An image was added for ${title}!`
         }))
+        //the user will be sent to the top of the page to see the new image
         setTimeout(() => {
-          window.location.reload();
+
           window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -116,13 +129,7 @@ function Recipe(props) {
         console.error(error)
     })
   }
-  // adding a image to the state
-  const onChangeHandler=event=>{
-    setState({
-      selectedFile: event.target.files[0],
-      loaded: 0,
-    })
-  }
+  
 
   return(
     <>

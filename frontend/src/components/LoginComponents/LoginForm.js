@@ -5,6 +5,7 @@ import {API_BASE_URL_AUTH} from '../../constants/apiConstants';
 import { withRouter } from "react-router-dom";
 import{ GoThumbsup, GoThumbsdown} from "react-icons/go";
 import FixUpEmail from '../RegistrationComponents/FixUpEmail'
+import { ClassicSpinner } from "react-spinners-kit";
 
 
 function LoginForm(props) {
@@ -12,7 +13,8 @@ function LoginForm(props) {
         email : "",
         password : "",
         successMessage: null,
-        alertMessage: null
+        alertMessage: null,
+        loading: false,
     })
 
     //sets the data in the state
@@ -51,6 +53,12 @@ function LoginForm(props) {
 
     //sends the username and password to the server
     async function  handleSubmitClick(e) {
+        //get the spinner to work
+
+        setState(prevState => ({
+            ...prevState,
+            loading: true
+        }))
         e.preventDefault();
         if( FixUpEmail(state.email)  && state.password.length >= 8) {
             
@@ -69,7 +77,8 @@ function LoginForm(props) {
                     setState(prevState => ({
                         ...prevState,
                         successMessage :null,
-                        alertMessage : "Username and password do not match."
+                        alertMessage : "Username and password do not match.",
+                        loading: false
                     }))
                     // if the user did not confirm his email address.
                     //A) new token will be sent to storage and he will receive an email with a link.
@@ -78,7 +87,8 @@ function LoginForm(props) {
                     setState(prevState => ({
                         ...prevState,
                         successMessage : "Your email address was not confirmed",
-                        alertMessage : null
+                        alertMessage : null,
+                        loading : false
                     }))
                      localStorage.setItem("email", response.data.payload.email);
                      localStorage.setItem("token", response.data.payload.token);
@@ -96,7 +106,8 @@ function LoginForm(props) {
                     setState(prevState => ({
                         ...prevState,
                         successMessage : null,
-                        alertMessage : response.data.payload.message
+                        alertMessage : response.data.payload.message,
+                        loading : false
                     }))
 
                 }else {
@@ -104,7 +115,8 @@ function LoginForm(props) {
                     setState(prevState => ({
                         ...prevState,
                         successMessage :`Hi ${response.data.payload.nickname}! Welcome back to your recipe app`,
-                        alertMessage : null
+                        alertMessage : null,
+                        loading : false
                     }))                       
                      localStorage.setItem("email", state.email);
                      localStorage.setItem("token", response.data.payload.newToken);
@@ -125,7 +137,8 @@ function LoginForm(props) {
             setState(prevState => ({
                 ...prevState,
                 successMessage : null,
-                alertMessage : 'please enter your email and password'
+                alertMessage : 'please enter your email and password',
+                loading : false
             }))
         }
     }
@@ -143,7 +156,6 @@ function LoginForm(props) {
                        value={state.email}
                        onChange={handleChange}
                 />
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div className="form-group text-left">
                 <label htmlFor="exampleInputPassword1">Password</label>
@@ -167,7 +179,8 @@ function LoginForm(props) {
                     type="submit" 
                     className="btn btn-primary"
                     onClick={handleSubmitClick}
-                >Submit</button>
+                >              
+                <ClassicSpinner size={20} color="#fff" loading = {state.loading} />   Submit</button>
             </form>
             
             <div className="registerMessage">
