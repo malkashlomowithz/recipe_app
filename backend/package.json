@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "script": {
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+},
+  "author": "Malky Shlomowitz",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",

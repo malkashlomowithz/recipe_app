@@ -37,59 +37,25 @@ function App() {
   return (
     <div className="App">
                   
-    <Router>
-    <div>
     <NavBar/>
 
         <Switch>
-          <Route exact path ="/">
-            <HomePage />
-            </Route>
-            <Route path="/register">
-              <RegistrationForm />
-            </Route>
-            <Route path="/confirm">
-              <Confirm/>
-            </Route>
-            <Route path="/confirmedEmail">
-              <ConfirmedEmail/>
-            </Route>
-            <Route path="/login">
-              <LoginForm />
-            </Route>
-            <Route path="/newPassword">
-              <NewPassword/>
-            </Route>
-            <Route path="/sendEmail">
-              <SendEmail/>
-            </Route>
-            <Route path="/editProfile">
-              <EditProfile/>
-            </Route>                      
-            <Route path="/updateRecipe">
-              <UpdateRecipe/>
-            </Route>
-            <Route path="/sendRecipe">
-              <SendRecipe/>
-            </Route>
-            <Route path="/recipe">
-              <Recipe/>
-            </Route>
-            <Route path="/top10page">
-              <Top10page/>
-            </Route>
-            <Route path="/editProfile">
-              <EditProfile/>
-            </Route> 
-            <Route path="/explanation">
-              <Explanation/>
-            </Route> 
-            <Route path="/contact">
-              <ContactForm/>
-          </Route> 
-          <Route path="/ConfirmedPayment">
-              <ConfirmedPayment/>
-          </Route> 
+          <Route exact path ="/" component = {HomePage}/>   
+          <Route exact path="/register" component = {RegistrationForm} />
+          <Route path="/confirm" component = {Confirm}/>
+          <Route path="/confirmedEmail" component = {ConfirmedEmail}/>
+          <Route exact path="/login" component = {LoginForm}/>     
+          <Route path="/newPassword" component = {NewPassword}/>            
+          <Route path="/sendEmail" component={SendEmail}/>
+          <Route path="/editProfile" component={EditProfile}/>
+          <Route path="/updateRecipe/:id" component={UpdateRecipe}/>
+          <Route path="/sendRecipe/:id" component = {SendRecipe}/>
+          <Route path="/recipe/:id" component = {Recipe}/>
+          <Route path="/top10page/:id" component = {Top10page}/>
+          <Route path="/editProfile" component={EditProfile}/>
+          <Route exact path="/explanation" component={Explanation}/>
+          <Route exact path="/contact" component={ContactForm}/>
+          <Route path="/ConfirmedPayment" component={ConfirmedPayment}/>
           {userIsLoggedIn === "true" ? (
           <Route exact path="/addRecipe" component = {AddRecipe}/>
           ):(<Redirect to = "/login" />)}
@@ -99,19 +65,16 @@ function App() {
           {userIsAdmin === "true" ? (
           <Route exact path="/admin" component = {AdminPage}/>
           ):(<Redirect to = "/" />)} 
-           <Route path="/*">
-              <NotFound/>
-          </Route>
+          <Route component={NotFound}/> 
           </Switch>
                
      <Footer/>
-     </div>
-    </Router>
+    
+    
     </div>
 
   );
 }
-
 export default App;
 
 

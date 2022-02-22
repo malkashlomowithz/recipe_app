@@ -111,6 +111,7 @@ function LoginForm(props) {
                     }))
 
                 }else {
+                    console.log(response.data.payload)
 
                     setState(prevState => ({
                         ...prevState,

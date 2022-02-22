@@ -1,7 +1,8 @@
 let express = require('express')
 let app = express();
 
-let port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
+const path = require("path");
 
 // Launch app to the specified port
 
@@ -20,6 +21,11 @@ app.use(function(req, res, next) {
 //Import routes
 let recipeRoutes = require("./router/recipeRoutes");
 let messageRouts = require("./router/messageRouter");
+
+app.use(express.static("frontend/build"));
+app.get("/*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "./frontend/build/index.html"));
+    });
 
 //Use API routes in the App
 app.use('/api', recipeRoutes);

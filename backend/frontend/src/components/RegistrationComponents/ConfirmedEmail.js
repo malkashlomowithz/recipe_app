@@ -99,7 +99,7 @@ function ConfirmedEmail(props) {
         
         props.history.push('/Confirm');       
     } 
-    const redirectToHome= () => {
+    const redirectToHome = () => {
         
         props.history.push('/');       
     } 
