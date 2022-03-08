@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //connect to mongoose
-const dbPath = 'mongodb+srv://malka:malka1517@cluster0.yojac.mongodb.net/RECIPE_APP?retryWrites=true&w=majority';
+const dbPath = '';
 const options = {
         useNewUrlParser: true,
         useUnifiedTopology: true,
